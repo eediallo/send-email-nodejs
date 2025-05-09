@@ -4,6 +4,7 @@ import "express-async-errors";
 
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
+import { sendEmail } from "./controllers/sendEmail.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
   res.send("<h1>Email Project</h1><a href='/send'>Send Email</a>");
 });
 
+app.get("/send", sendEmail);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
