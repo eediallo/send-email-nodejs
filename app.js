@@ -1,18 +1,19 @@
-require('dotenv').config();
-require('express-async-errors');
+import dotenv from "dotenv";
+import express from "express";
+import "express-async-errors";
 
-const express = require('express');
+import notFoundMiddleware from "./middleware/not-found.js";
+import errorHandlerMiddleware from "./middleware/error-handler.js";
+
+dotenv.config();
+
 const app = express();
-
-// error handler
-const notFoundMiddleware = require('./middleware/not-found');
-const errorHandlerMiddleware = require('./middleware/error-handler');
 
 app.use(express.json());
 
 // routes
-app.get('/', (req, res) => {
-  res.send('<h1>Email Project</h1>');
+app.get("/", (req, res) => {
+  res.send("<h1>Email Project</h1><a href='/send'>Send Email</a>");
 });
 
 app.use(notFoundMiddleware);
